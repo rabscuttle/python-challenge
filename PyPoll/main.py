@@ -40,4 +40,21 @@ with open(csvpath) as csvfile:
         print(name + ": " + str(pct) + "% ("+ str(count) + ")")
     print("----------------")
     print("Winner: " + winnerName)
-    print("----------------")    
+    print("----------------")
+    
+# Write final table to csv
+
+# Specify the file to write to
+output_path = os.path.join("analysis", "analysis.txt")
+
+line1 = "Election Results"
+line2 = "----------------"
+line3 = "Total Votes: " + str(totalVotes)
+line4 = "Winner: " + winnerName
+
+with open(output_path,'w') as out:
+    out.write('{}\n{}\n{}\n{}\n'.format(line1,line2,line3,line2))
+    for name, count in results.items():
+        pct = round((count/totalVotes)*100, 3)
+        out.write(name + ": " + str(pct) + "% ("+ str(count) + ")\n")
+    out.write('{}\n{}\n{}\n'.format(line2,line4,line2))
